@@ -69,13 +69,13 @@ save_resized_album_art(image_s *imsrc, const char *path)
 
 	if( imsrc->width > imsrc->height )
 	{
-		dstw = 160;
-		dsth = (imsrc->height<<8) / ((imsrc->width<<8)/160);
+		dstw = 640;
+		dsth = (imsrc->height<<8) / ((imsrc->width<<8)/640);
 	}
 	else
 	{
-		dstw = (imsrc->width<<8) / ((imsrc->height<<8)/160);
-		dsth = 160;
+		dstw = (imsrc->width<<8) / ((imsrc->height<<8)/640);
+		dsth = 640;
 	}
 	imdst = image_resize(imsrc, dstw, dsth);
 	if( !imdst )
@@ -216,7 +216,7 @@ check_embedded_art(const char *path, uint8_t *image_data, int image_size)
 	width = imsrc->width;
 	height = imsrc->height;
 
-	if( width > 160 || height > 160 )
+	if( width > 640 || height > 640 )
 	{
 		art_path = save_resized_album_art(imsrc, path);
 	}
@@ -337,7 +337,7 @@ existing_file:
 found_file:
 			width = imsrc->width;
 			height = imsrc->height;
-			if( width > 160 || height > 160 )
+			if( width > 640 || height > 640 )
 				art_file = save_resized_album_art(imsrc, file);
 			else
 				art_file = strdup(file);
